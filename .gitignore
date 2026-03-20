@@ -1,0 +1,9 @@
+.env
+__pycache__/
+# Essential models and data included
+# training_master_*.csv (deleted)
+# benchmark_val_predictions_*.csv (deleted)
+.venv/
+node_modules/
+dist/
+.DS_Store

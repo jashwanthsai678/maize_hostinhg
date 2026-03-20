@@ -1,0 +1,2 @@
+decision,best_rmse_model,best_rmse,best_rmse_weights,best_mae_model,best_mae,best_mae_weights,notes
+use_blended_tabular_models_as_current_best,blend_benchmark_v2_v21,0.817716,"benchmark=0.2,v2=0.5,v21=0.3",blend_benchmark_v2_v21,0.435922,"benchmark=0.7,v2=0.2,v21=0.1",Current best performance comes from blending context benchmark with engineered EO/weather tabular models.

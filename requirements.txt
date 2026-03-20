@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+httpx
+pydantic
+python-dotenv
+ultralytics
+pillow
+pandas
+numpy
+joblib
+scikit-learn
+python-multipart

@@ -1,0 +1,15 @@
+{
+  "district_std": "Anugul",
+  "crop_year": 1997,
+  "season": "Autumn",
+  "area_ha": 948.0,
+  "T2M": [24.8, 25.0, 23.7, 24.1],
+  "T2M_MAX": [28.8, 29.1, 27.5, 28.2],
+  "T2M_MIN": [20.9, 21.3, 19.8, 20.0],
+  "PRECTOTCORR": [0.0, 0.0, 5.5, 12.0],
+  "RH2M": [83.1, 82.5, 84.0, 85.2],
+  "ALLSKY_SFC_SW_DWN": [16.5, 16.9, 15.8, 16.0],
+  "crop_type": "maize",
+  "growth_stage": "vegetative",
+  "language": "english"
+}

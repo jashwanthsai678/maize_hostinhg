@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maize Advisory System | AI-Powered Farming</title>
+    <!-- Google Fonts for modern typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="background-container">
+        <div class="gradient-sphere sphere-1"></div>
+        <div class="gradient-sphere sphere-2"></div>
+    </div>
+
+    <div class="app-container">
+        <header>
+            <div class="logo">
+                <i class="fa-solid fa-leaf"></i>
+                <h1>AgriSense AI</h1>
+            </div>
+            <p class="subtitle">Intelligent Maize Advisory System</p>
+        </header>
+
+        <main>
+            <div class="grid-layout">
+                <!-- Left Column: Input Form -->
+                <div class="glass-panel input-section">
+                    <h2><i class="fa-solid fa-magnifying-glass-chart"></i> New Advisory Request</h2>
+                    
+                    <form id="advisory-form">
+                        <!-- Image Upload -->
+                        <div class="form-group">
+                            <label>Crop Image</label>
+                            <div class="upload-area" id="upload-area">
+                                <input type="file" id="image-input" accept="image/*" hidden>
+                                <div class="upload-content" id="upload-content">
+                                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                                    <p>Drag & Drop or <span class="highlight">Browse</span></p>
+                                </div>
+                                <img id="image-preview" src="#" alt="Preview" style="display:none;">
+                            </div>
+                        </div>
+
+                        <!-- Context Accordion -->
+                        <div class="accordion">
+                            <div class="accordion-header" id="context-toggle">
+                                <h3><i class="fa-solid fa-location-dot"></i> Environmental Context</h3>
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+                            <div class="accordion-content" id="context-content">
+                                <div class="form-row">
+                                    <div class="form-group half">
+                                        <label for="district">District</label>
+                                        <input type="text" id="district" value="Anugul" required>
+                                    </div>
+                                    <div class="form-group half">
+                                        <label for="season">Season</label>
+                                        <select id="season">
+                                            <option value="Kharif">Kharif</option>
+                                            <option value="Rabi">Rabi</option>
+                                            <option value="Autumn">Autumn</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group half">
+                                        <label for="crop_year">Crop Year</label>
+                                        <input type="number" id="crop_year" value="1997" required>
+                                    </div>
+                                    <div class="form-group half">
+                                        <label for="area_ha">Area (Ha)</label>
+                                        <input type="number" step="0.1" id="area_ha" value="948.0" required>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group half">
+                                        <label for="growth_stage">Growth Stage</label>
+                                        <select id="growth_stage">
+                                            <option value="vegetative">Vegetative</option>
+                                            <option value="flowering">Flowering</option>
+                                            <option value="maturity">Maturity</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group half">
+                                        <label for="language">Language</label>
+                                        <select id="language">
+                                            <option value="english">English</option>
+                                            <option value="odia">Odia</option>
+                                            <option value="hindi">Hindi</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="primary-btn" id="submit-btn" disabled>
+                            <span class="btn-text">Generate Advisory</span>
+                            <div class="spinner" style="display:none;"></div>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Right Column: Results -->
+                <div class="glass-panel results-section" id="results-panel">
+                    <div class="empty-state" id="empty-state">
+                        <i class="fa-solid fa-seedling"></i>
+                        <p>Upload an image to see the advisory</p>
+                    </div>
+
+                    <div class="results-content" id="results-content" style="display:none;">
+                        
+                        <!-- Visual Diagnosis -->
+                        <div class="result-card primary-card">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-camera"></i> Visual Diagnosis</h3>
+                                <span class="badge" id="severity-badge">High Severity</span>
+                            </div>
+                            <div class="diagnosis-body">
+                                <div class="annotated-img-container">
+                                    <img id="result-image" src="" alt="Annotated Image">
+                                </div>
+                                <div class="diagnosis-stats">
+                                    <div class="stat-item">
+                                        <span class="stat-label">Detected Issue</span>
+                                        <span class="stat-value" id="res-diagnosis">Leaf Blight</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Confidence</span>
+                                        <div class="progress-bar">
+                                            <div class="progress" id="res-confidence-bar" style="width: 85%;"></div>
+                                        </div>
+                                        <span class="stat-value small" id="res-confidence-text">85%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Expected Yield Baseline -->
+                        <div class="result-card secondary-card mt-4">
+                             <div class="card-header">
+                                <h3><i class="fa-solid fa-chart-line"></i> Yield Projection</h3>
+                             </div>
+                             <div class="yield-content">
+                                 <div class="yield-value-container">
+                                     <span class="yield-value" id="res-yield">1.8</span>
+                                     <span class="yield-unit">t/ha</span>
+                                 </div>
+                                 <p class="yield-desc">Expected baseline for <strong id="res-district">Anugul</strong> (<strong id="res-season">Autumn</strong>)</p>
+                             </div>
+                        </div>
+
+                        <!-- Expert Advisory (LLM) -->
+                        <div class="result-card tertiary-card mt-4">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-user-tie"></i> Agronomist Advisory</h3>
+                            </div>
+                            <div class="advisory-content" id="res-advisory">
+                                <!-- Populated by JS -->
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Hidden Raw Data for API Context -->
+    <script>
+        const weatherData = {
+            "T2M": [24.8, 25.0, 23.7, 24.1],
+            "T2M_MAX": [28.8, 29.1, 27.5, 28.2],
+            "T2M_MIN": [20.9, 21.3, 19.8, 20.0],
+            "PRECTOTCORR": [0.0, 0.0, 5.5, 12.0],
+            "RH2M": [83.1, 82.5, 84.0, 85.2],
+            "ALLSKY_SFC_SW_DWN": [16.5, 16.9, 15.8, 16.0]
+        };
+    </script>
+    <script src="/static/app.js"></script>
+</body>
+</html>
